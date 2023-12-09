@@ -1,4 +1,3 @@
-import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { deepOrange } from "@mui/material/colors";
 import Avatar from "@mui/material/Avatar";
@@ -6,111 +5,97 @@ import Avatar from "@mui/material/Avatar";
 const useStyles = makeStyles((theme) =>
   createStyles({
     messageRow: {
-      display: "flex"
+      display: "flex",
+      marginBottom: theme.spacing(1), // Adds spacing between each message row
     },
     messageRowRight: {
       display: "flex",
-      justifyContent: "flex-end"
+      justifyContent: "flex-end",
+      marginBottom: theme.spacing(1),
     },
     messageBlue: {
       position: "relative",
-      marginLeft: "20px",
-      marginBottom: "10px",
-      padding: "10px",
+      marginLeft: theme.spacing(2.5),
+      marginBottom: theme.spacing(1),
+      padding: theme.spacing(1),
       backgroundColor: "#A8DDFD",
       width: "60%",
-      //height: "50px",
       textAlign: "left",
       font: "400 .9em 'Open Sans', sans-serif",
       border: "1px solid #97C6E3",
-      borderRadius: "10px",
-      "&:after": {
+      borderRadius: theme.shape.borderRadius,
+      "&:after, &:before": { // Simplifies the arrow styling
         content: "''",
         position: "absolute",
-        width: "0",
-        height: "0",
+        width: 0,
+        height: 0,
+        top: 0,
         borderTop: "15px solid #A8DDFD",
         borderLeft: "15px solid transparent",
         borderRight: "15px solid transparent",
-        top: "0",
-        left: "-15px"
+        left: "-15px",
       },
       "&:before": {
-        content: "''",
-        position: "absolute",
-        width: "0",
-        height: "0",
-        borderTop: "17px solid #97C6E3",
-        borderLeft: "16px solid transparent",
-        borderRight: "16px solid transparent",
+        borderTopColor: "#97C6E3",
+        left: "-17px",
         top: "-1px",
-        left: "-17px"
-      }
+      },
     },
     messageOrange: {
       position: "relative",
-      marginRight: "20px",
-      marginBottom: "10px",
-      padding: "10px",
+      marginRight: theme.spacing(2.5),
+      marginBottom: theme.spacing(1),
+      padding: theme.spacing(1),
       backgroundColor: "#f8e896",
       width: "60%",
-      //height: "50px",
       textAlign: "left",
       font: "400 .9em 'Open Sans', sans-serif",
       border: "1px solid #dfd087",
-      borderRadius: "10px",
-      "&:after": {
+      borderRadius: theme.shape.borderRadius,
+      "&:after, &:before": {
         content: "''",
         position: "absolute",
-        width: "0",
-        height: "0",
+        width: 0,
+        height: 0,
+        top: 0,
         borderTop: "15px solid #f8e896",
         borderLeft: "15px solid transparent",
         borderRight: "15px solid transparent",
-        top: "0",
-        right: "-15px"
+        right: "-15px",
       },
       "&:before": {
-        content: "''",
-        position: "absolute",
-        width: "0",
-        height: "0",
-        borderTop: "17px solid #dfd087",
-        borderLeft: "16px solid transparent",
-        borderRight: "16px solid transparent",
+        borderTopColor: "#dfd087",
+        right: "-17px",
         top: "-1px",
-        right: "-17px"
-      }
+      },
     },
-
     messageContent: {
       padding: 0,
-      margin: 0
+      margin: 0,
+      marginBottom: theme.spacing(1), // Space between message and timestamp
     },
     messageTimeStampRight: {
-      position: "absolute",
       fontSize: ".85em",
       fontWeight: "300",
-      marginTop: "10px",
-      bottom: "-3px",
-      right: "5px"
+      position: "absolute",
+      bottom: "-15px",
+      right: "5px",
     },
-
     orange: {
       color: theme.palette.getContrastText(deepOrange[500]),
       backgroundColor: deepOrange[500],
       width: theme.spacing(4),
-      height: theme.spacing(4)
+      height: theme.spacing(4),
     },
     avatarNothing: {
       color: "transparent",
       backgroundColor: "transparent",
       width: theme.spacing(4),
-      height: theme.spacing(4)
+      height: theme.spacing(4),
     },
     displayName: {
-      marginLeft: "20px"
-    }
+      marginLeft: theme.spacing(2.5),
+    },
   })
 );
 

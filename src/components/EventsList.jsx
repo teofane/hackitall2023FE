@@ -1,46 +1,82 @@
-import Box from "@mui/material/Box";
+// EventsList.js
+import React, { useState } from 'react';
 import {
-  CardActions,
-  Card,
-  CardContent,
   List,
-  ListItemAvatar, ListItemText, ListItem
-} from "@mui/material";
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  IconButton,
+  Avatar,
+  Typography,
+  Paper,
+} from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Avatar from "@mui/material/Avatar";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function EventsList() {
+  const [likedEvents, setLikedEvents] = useState([]);
+
+  const handleLikeClick = (eventNumber) => {
+    // Toggle the like status for the clicked event
+    setLikedEvents((prevLikedEvents) =>
+      prevLikedEvents.includes(eventNumber)
+        ? prevLikedEvents.filter((event) => event !== eventNumber)
+        : [...prevLikedEvents, eventNumber]
+    );
+  };
+
+  const eventBoxStyles = (eventNumber) => ({
+    bgcolor: likedEvents.includes(eventNumber) ? '#ff5252' : 'transparent',
+    margin: '10px',
+    borderRadius: '16px',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    position: 'relative',
+    width: 'calc(20% - 20px)',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease-in-out',
+  });
+
+  const heartIconStyles = {
+    position: 'absolute',
+    top: '8px',
+    right: '8px',
+    cursor: 'pointer',
+    color: likedEvents.length > 0 ? 'white' : 'grey',
+    transition: 'color 0.3s ease-in-out',
+  };
+
   return (
-    <Box sx={{ width: '100%', maxWidth: 400, ml:1, mt:"3rem", border: 1}}>
-      <Typography variant="h5" align={"center"} sx = {{mb: 1.5}}>
-        Upcoming events
-      </Typography>
-        <List sx = {{overflow: "auto", maxHeight: 420 , border: 1}}>
-          {[1,2,3,4,5,6,7,8,9].map((el) =>
-            <ListItem
-              key={el}
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <NavigateNextIcon />
-                </IconButton>
-              }
-            >
-              <ListItemAvatar >
-                <Avatar>
-                  <NavigateNextIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary="Single-line item"
-                secondary="wtf"
-              />
-            </ListItem>
-          )}
-        </List>
-    </Box>
+    <Paper
+      sx={{
+        width: '100%',
+        ml: 1,
+        mt: '3rem',
+        border: 0,
+        p: 2,
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+      }}
+    >
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => (
+        <Paper key={el} sx={eventBoxStyles(el)} onClick={() => handleLikeClick(el)}>
+          <IconButton sx={heartIconStyles}>
+            <FavoriteIcon />
+          </IconButton>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <NavigateNextIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={<Typography fontWeight="bold">Single-line text</Typography>}
+              secondary={el % 2 === 0 ? 'Secondary text' : 'Alternate text'}
+            />
+          </ListItem>
+        </Paper>
+      ))}
+    </Paper>
   );
 }
 
